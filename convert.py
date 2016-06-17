@@ -10,7 +10,7 @@ def create_single_object_json(keys, line):
     return '{{{0}}}'.format(', '.join(json_chunks))
 
 
-def csv_file_to_json_array(csv_lines):
+def csv_lines_to_json(csv_lines):
     individual_obj = []
 
     props = csv_lines[0].strip().split(',')
@@ -27,6 +27,6 @@ def get_csv_lines(csv_file_name):
 
 
 if __name__ == '__main__':
-    csv_lines = get_csv_lines('historic_site_visits.csv')
-    json_array = csv_file_to_json_array(csv_lines)
+    lines = get_csv_lines('historic_site_visits.csv')
+    json_array = csv_lines_to_json(lines)
     print(json_array)
