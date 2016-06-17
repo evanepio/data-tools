@@ -11,12 +11,10 @@ def create_single_object_json(keys, line):
 
 
 def csv_lines_to_json(csv_lines):
-    individual_obj = []
 
     props = csv_lines[0].strip().split(',')
 
-    for line in csv_lines[1:]:
-        individual_obj.append(create_single_object_json(props, line))
+    individual_obj = [create_single_object_json(props, line) for line in csv_lines[1:]]
 
     return '[' + ',\n'.join(individual_obj) + ']'
 
