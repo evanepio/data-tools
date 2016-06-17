@@ -1,3 +1,5 @@
+import sys
+
 def create_key_value_json(key, value):
     return '"{0}": "{1}"'.format(key, value)
 
@@ -25,6 +27,6 @@ def get_csv_lines(csv_file_name):
 
 
 if __name__ == '__main__':
-    lines = get_csv_lines('historic_site_visits.csv')
+    lines = get_csv_lines(sys.argv[1])
     json_array = csv_lines_to_json(lines)
     print(json_array)
