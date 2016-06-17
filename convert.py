@@ -1,24 +1,16 @@
-import sys
+import sys, json
 
 
-def create_key_value_json(key, value):
-    return '"{0}": "{1}"'.format(key, value)
-
-
-def create_single_object_json(keys, line):
+def create_object_from_csv_line(keys, line):
     values = line.strip().split(',')
 
-    json_chunks = [create_key_value_json(key, value) for key, value in zip(keys, values)]
-
-    return '{{{0}}}'.format(', '.join(json_chunks))
+    return dict(zip(keys, values))
 
 
-def csv_lines_to_json(csv_lines):
+def create_array_of_objects_from_csv_lines(csv_lines):
     props = csv_lines[0].strip().split(',')
 
-    individual_obj = [create_single_object_json(props, line) for line in csv_lines[1:]]
-
-    return '[' + ',\n'.join(individual_obj) + ']'
+    return [create_object_from_csv_line(props, line) for line in csv_lines[1:]]
 
 
 def get_csv_lines(csv_file_name):
@@ -28,5 +20,5 @@ def get_csv_lines(csv_file_name):
 
 if __name__ == '__main__':
     lines = get_csv_lines(sys.argv[1])
-    json_array = csv_lines_to_json(lines)
-    print(json_array)
+    json_array = create_array_of_objects_from_csv_lines(lines)
+    print(json.dumps(json_array, indent=4, separators=(',', ': ')))
