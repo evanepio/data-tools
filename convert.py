@@ -20,8 +20,11 @@ def print_json(csv_file_name):
 
         print("[")
 
+        individual_obj = []
         for line in lines[1:]:
-            print(create_single_object_json(props, line), ',')
+            individual_obj.append(create_single_object_json(props, line))
+
+        print(',\n'.join(individual_obj))
 
         print("]")
 
