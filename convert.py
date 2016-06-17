@@ -14,7 +14,6 @@ def create_single_object_json(keys, line):
 
 
 def csv_lines_to_json(csv_lines):
-
     props = csv_lines[0].strip().split(',')
 
     individual_obj = [create_single_object_json(props, line) for line in csv_lines[1:]]
