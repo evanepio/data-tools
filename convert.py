@@ -2,6 +2,16 @@ def create_key_value_json(key, value):
     return '"{0}": "{1}"'.format(key, value)
 
 
+def create_single_object_json(keys, line):
+    values = line.strip().split(',')
+
+    json_chunks = []
+    for index in range(len(values)):
+        json_chunks.append(create_key_value_json(keys[index], values[index]))
+
+    return '{{{0}}}'.format(', '.join(json_chunks))
+
+
 def print_json(csv_file_name):
     with open(csv_file_name) as csvFile:
         lines = csvFile.readlines()
@@ -11,13 +21,7 @@ def print_json(csv_file_name):
         print("[")
 
         for line in lines[1:]:
-            values = line.strip().split(",")
-
-            json_chunks = []
-            for index in range(len(values)):
-                json_chunks.append(create_key_value_json(props[index], values[index]))
-
-            print('{{{0}}}'.format(', '.join(json_chunks)))
+            print(create_single_object_json(props, line), ',')
 
         print("]")
 
