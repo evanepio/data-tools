@@ -24,12 +24,8 @@ def csv_file_to_json_array(csv_lines):
 
 
 def get_csv_lines(csv_file_name):
-    lines = []
-
-    with open(csv_file_name) as csvFile:
-        lines = csvFile.readlines()
-
-    return lines
+    with open(csv_file_name) as csv_file:
+        return csv_file.readlines()
 
 
 if __name__ == '__main__':
