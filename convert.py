@@ -5,9 +5,7 @@ def create_key_value_json(key, value):
 def create_single_object_json(keys, line):
     values = line.strip().split(',')
 
-    json_chunks = []
-    for index in range(len(values)):
-        json_chunks.append(create_key_value_json(keys[index], values[index]))
+    json_chunks = [create_key_value_json(key, value) for key, value in zip(keys, values)]
 
     return '{{{0}}}'.format(', '.join(json_chunks))
 
