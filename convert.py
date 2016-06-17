@@ -1,5 +1,6 @@
 import sys
 
+
 def create_key_value_json(key, value):
     return '"{0}": "{1}"'.format(key, value)
 
