@@ -8,9 +8,9 @@ def create_object_from_csv_line(keys, line):
 
 
 def create_array_of_objects_from_csv_lines(csv_lines):
-    props = csv_lines[0].strip().split(',')
+    object_properties = csv_lines[0].strip().split(',')
 
-    return [create_object_from_csv_line(props, line) for line in csv_lines[1:]]
+    return [create_object_from_csv_line(object_properties, line) for line in csv_lines[1:]]
 
 
 def get_csv_lines(csv_file_name):
