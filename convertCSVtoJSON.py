@@ -1,24 +1,16 @@
-import sys, json
+import sys, json, csv
 
 
-def create_object_from_csv_line(keys, line):
-    values = line.strip().split(',')
-
-    return dict(zip(keys, values))
-
-
-def create_array_of_objects_from_csv_lines(csv_lines):
-    object_properties = csv_lines[0].strip().split(',')
-
-    return [create_object_from_csv_line(object_properties, line) for line in csv_lines[1:]]
-
-
-def get_csv_lines(csv_file_name):
+def get_rows_from_csv_file(csv_file_name):
+    all_rows = []
     with open(csv_file_name) as csv_file:
-        return csv_file.readlines()
+        reader = csv.reader(csv_file, dialect='excel')
+        for row in reader:
+            all_rows.append(row)
+    return all_rows
 
 
 if __name__ == '__main__':
-    lines = get_csv_lines(sys.argv[1])
-    json_array = create_array_of_objects_from_csv_lines(lines)
-    print(json.dumps(json_array, indent=4, separators=(',', ': ')))
+    rows = get_rows_from_csv_file(sys.argv[1])
+    objects = [dict(zip(rows[0], current_row)) for current_row in rows[1:]]
+    print(json.dumps(objects, indent=4, separators=(',', ': ')))
